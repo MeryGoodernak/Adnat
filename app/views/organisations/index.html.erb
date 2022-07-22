@@ -1,0 +1,31 @@
+<div class="container pt-4">
+  <% if !current_user.organisation_id %>
+    <p>You aren't a member of any organisations. Join an existing one or create a new one. </p>
+  <% end %>
+  <div class="row">
+    <div class="col-12 col-lg-8 p-2">
+      <h1>Organisations</h1>
+      <% if @organisations %>
+        <ul>
+          <% @organisations.each do |organisation| %>
+            <li class="m-3">
+              <div class="d-flex">
+                <div class="flex-grow-1"><span><%= organisation.name %></span></div>
+                <div class="btn btn-success p-2 mx-1">Edit</div>
+                <div class="btn btn-info p-2 mx-1">Join</div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+    <div class="col-12 col-lg-4 p-2">
+      <h3>Add an organisation</h3>
+      <%= simple_form_for @organisation do |f| %>
+        <%= f.input :name %>
+        <%= f.input :hourly_rate %>
+        <%= f.button :submit, class: 'btn btn-secondary' %>
+      <% end %>
+    </div>
+  </div>
+</div>
