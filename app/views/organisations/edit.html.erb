@@ -1,2 +1,5 @@
-<h1>Organisations#edit</h1>
-<p>Find me in app/views/organisations/edit.html.erb</p>
+<div class="container pt-4">
+  <h1>Edit Organisation</h1>
+  <%= render 'form', organisation: @organisation %>
+  <%= link_to 'Delete Organisation', organisation_path(@organisation), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger my-3" %>
+</div>

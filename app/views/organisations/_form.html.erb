@@ -1,0 +1,5 @@
+<%= simple_form_for organisation do |f| %>
+        <%= f.input :name %>
+        <%= f.input :hourly_rate, hint: 'This is GBP per hour.' %>
+        <%= f.button :submit, class: 'btn btn-secondary' %>
+      <% end %>
