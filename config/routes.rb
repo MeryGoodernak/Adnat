@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :organisations, except: %i[new] do
-    get 'join', on: :member
-    get 'leave', on: :collection
+    member do
+      get 'join'
+      get 'leave'
+    end
   end
 end

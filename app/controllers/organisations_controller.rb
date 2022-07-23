@@ -1,14 +1,9 @@
 class OrganisationsController < ApplicationController
-  before_action :set_organisation, only: %i[show edit update destroy join]
+  before_action :set_organisation, only: %i[show edit update destroy join leave]
 
   def index
     @organisations = Organisation.all
     @organisation = Organisation.new
-  end
-
-  def join
-    current_user.update!(organisation: @organisation)
-    redirect_to organisation_path(@organisation)
   end
 
   def show
@@ -40,8 +35,13 @@ class OrganisationsController < ApplicationController
   end
 
   def leave
-    current_user.update!(organisation: nil)
+    @organisation.users.delete(current_user)
     redirect_to organisations_path
+  end
+
+  def join
+    current_user.update!(organisation: @organisation)
+    redirect_to organisation_path(@organisation)
   end
 
   private
