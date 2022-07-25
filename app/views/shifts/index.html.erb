@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <% if @shifts %>
+      <% if @shifts.present? %>
         <% @shifts.each do |shift| %>
           <tr>
             <td><%= shift.user.name %></td>
@@ -23,22 +23,23 @@
             <td><%= shift.break_length %> min</td>
             <td><%= net_work_hours(shift) %></td>
             <td><%= shift.shift_cost(@organisation.hourly_rate) %></td>
-            <td><%= link_to "Delete", organisation_shifts_path(@organisation), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-decoration-none btn btn-danger" %></td>
+            <td><%= link_to "Modify", organisation_shift_path(@organisation, shift), method: :put, class: "text-decoration-none btn btn-info" %></td>
+            <td><%= link_to "Delete", organisation_shift_path(@organisation, shift), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-decoration-none btn btn-danger" %></td>
           </tr>
         <% end %>
       <% else %>
         <tr>Be the first one that start a shift at <%= @organisation.name %></tr>
       <% end %>
-      <%= simple_form_for [@organisation, @shift] do |f| %>
-        <tr>
+      <tr>
+        <%= simple_form_for [@organisation, @shift] do |f| %>
           <td class="text-center"><%= current_user.name %></td>
           <td class="text-center"><%= f.input :started_at, as: :date, html5: true, label: false %></td>
           <td class="text-center"><%= f.input :started_at, as: :time, ignore_date: true, html5: true, label: false %></td>
           <td class="text-center"><%= f.input :ended_at, as: :time, ignore_date: true, html5: true, label: false %></td>
-          <td class="text-center"><%= f.input :break_length, label: false %></td>
-          <td colspan="4" class="text-center"><%= f.button :submit, class: "btn btn-success" %></td>
-        </tr>
-      <% end %>
+          <td colspan="2" class="text-center"><%= f.input :break_length, label: false %></td>
+          <td colspan="2" class="text-center"><%= f.button :submit, class: "btn btn-success" %></td>
+        <% end %>
+      </tr>
     </tbody>
   </table>
 </div>
