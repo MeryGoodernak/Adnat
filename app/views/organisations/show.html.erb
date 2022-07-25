@@ -1,7 +1,7 @@
 <div class="container pt-4">
   <h1>Wellcome to <%= @organisation.name %></h1>
   <div class="d-flex">
-    <div class="btn btn-success">View Shifts</div>
+    <div><%= link_to "View Shifts", organisation_shifts_path(@organisation), class: "text-decoration-none btn btn-success p-2 mx-1" %></div>
     <div><%= link_to "Edit", edit_organisation_path(@organisation), class: "text-decoration-none btn btn-info p-2 mx-1" %></div>
     <div><%= link_to "Leave", leave_organisation_path(@organisation), class: "text-decoration-none btn btn-danger p-2 mx-1" %></div>
   </div>
