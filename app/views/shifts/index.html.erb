@@ -22,7 +22,7 @@
             <td><%= shift.ended_at.strftime("%I:%M%p") %></td>
             <td><%= shift.break_length %> min</td>
             <td><%= net_work_hours(shift) %></td>
-            <td><%= shift.shift_cost(@organisation.hourly_rate) %></td>
+            <td><%= shift.shift_cost(@organisation.hourly_rate).round(2) %></td>
             <td>
               <%= link_to "Modify", organisation_shift_path(@organisation, shift), method: :put, class: "text-decoration-none btn btn-info" %>
               <%= link_to "Delete", organisation_shift_path(@organisation, shift), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-decoration-none btn btn-danger" %>

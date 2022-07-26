@@ -24,6 +24,6 @@ class Shift < ApplicationRecord
   end
 
   def shift_cost(rate)
-    (net_work_minutes / 60) * rate
+    (net_work_minutes / 60.0) * rate
   end
 end
