@@ -1,9 +1,9 @@
 class ShiftsController < ApplicationController
-  before_action :set_organisation, only: %I[index create edit update destroy]
+  before_action :set_organisation, only: %I[index create edit update destroy previous]
   before_action :set_shift, only: %I[edit update destroy]
 
   def index
-    @shifts = @organisation.users.map(&:shifts).flatten
+    @shifts = @organisation.shifts.where(user: @organisation.users)
     @shift = Shift.new
   end
 
@@ -32,6 +32,10 @@ class ShiftsController < ApplicationController
   def destroy
     @shift.destroy
     redirect_to organisation_shifts_path(@organisation), status: :see_other, notice: "Shift was successfully deleted."
+  end
+
+  def previous
+    @shifts = @organisation.shifts.where.not(user: @organisation.users)
   end
 
   private

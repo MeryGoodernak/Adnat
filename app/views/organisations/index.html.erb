@@ -10,9 +10,13 @@
           <% @organisations.each do |organisation| %>
             <li class="m-3">
               <div class="d-flex">
-                <div class="flex-grow-1"><span><%= organisation.name %></span></div>
-                <div><%= link_to "Edit", edit_organisation_path(organisation.id), class: "text-decoration-none btn btn-info p-2 mx-1" %></div>
-                <div><%= link_to "Join", join_organisation_path(organisation.id), class: "text-decoration-none btn btn-success p-2 mx-1" %></div>
+                <div class="flex-grow-1"><span><%= link_to organisation.name, organisation_path(organisation), class: "text-decoration-none" %></span></div>
+                <div><%= link_to "Edit", edit_organisation_path(organisation), class: "text-decoration-none btn btn-info p-2 mx-1" %></div>
+                <% if current_user.organisation == organisation %>
+                  <div><%= link_to "Leave", leave_organisation_path(organisation), class: "text-decoration-none btn btn-danger p-2 mx-1" %></div>
+                <% else %>
+                  <div><%= link_to "Join", join_organisation_path(organisation), class: "text-decoration-none btn btn-success p-2 mx-1" %></div>
+                <% end %>
               </div>
             </li>
           <% end %>
