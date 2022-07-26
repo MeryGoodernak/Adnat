@@ -1,19 +1,19 @@
 <div class="container pt-4">
   <h1>Here is <%= @organisation.name %>'s shifts</h1>
-  <table class="table table-striped table-hover mt-3">
-    <thead>
-      <tr>
-        <th>Employee name</th>
-        <th>Shift date</th>
-        <th>Start time</th>
-        <th>Finish time</th>
-        <th>Break length</th>
-        <th>Hours worked</th>
-        <th>Shift cost</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% if @shifts.present? %>
+  <% if @shifts.present? %>
+    <table class="table table-striped table-hover mt-3">
+      <thead>
+        <tr>
+          <th>Employee name</th>
+          <th>Shift date</th>
+          <th>Start time</th>
+          <th>Finish time</th>
+          <th>Break length</th>
+          <th>Hours worked</th>
+          <th>Shift cost</th>
+        </tr>
+      </thead>
+      <tbody>
         <% @shifts.each do |shift| %>
           <tr>
             <td><%= shift.user.name %></td>
@@ -27,19 +27,20 @@
             <td><%= link_to "Delete", organisation_shift_path(@organisation, shift), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-decoration-none btn btn-danger" %></td>
           </tr>
         <% end %>
-      <% else %>
-        <tr>Be the first one that start a shift at <%= @organisation.name %></tr>
+  <% else %>
+          <tr>Be the first one that start a shift at <%= @organisation.name %></tr>
+  <% end %>
+      </tbody>
+    </table>
+    <div class="mt-5">
+      <%= simple_form_for [@organisation, @shift] do |f| %>
+        <div class="d-flex justify-content-around">
+          <div class=""><%= f.input :started_at, as: :date, html5: true, label: "Shift date" %></div>
+          <div class=""><%= f.input :started_at, as: :time, ignore_date: true, html5: true, label: "Start" %></div>
+          <div class=""><%= f.input :ended_at, as: :time, ignore_date: true, html5: true, label: "Finish" %></div>
+          <div class=""><%= f.input :break_length, label: "Break length (minutes)" %></div>
+          <div class="mt-4"><%= f.button :submit, class: "btn btn-success" %></div>
+        </div>
       <% end %>
-      <tr>
-        <%= simple_form_for [@organisation, @shift] do |f| %>
-          <td class="text-center"><%= current_user.name %></td>
-          <td class="text-center"><%= f.input :started_at, as: :date, html5: true, label: false %></td>
-          <td class="text-center"><%= f.input :started_at, as: :time, ignore_date: true, html5: true, label: false %></td>
-          <td class="text-center"><%= f.input :ended_at, as: :time, ignore_date: true, html5: true, label: false %></td>
-          <td colspan="2" class="text-center"><%= f.input :break_length, label: false %></td>
-          <td colspan="2" class="text-center"><%= f.button :submit, class: "btn btn-success" %></td>
-        <% end %>
-      </tr>
-    </tbody>
-  </table>
+    </div>
 </div>
