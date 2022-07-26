@@ -24,7 +24,7 @@
             <td><%= net_work_hours(shift) %></td>
             <td><%= shift.shift_cost(@organisation.hourly_rate).round(2) %></td>
             <td>
-              <%= link_to "Modify", organisation_shift_path(@organisation, shift), method: :put, class: "text-decoration-none btn btn-info" %>
+              <%= link_to "Modify", edit_organisation_shift_path(@organisation, shift), method: :put, class: "text-decoration-none btn btn-info" %>
               <%= link_to "Delete", organisation_shift_path(@organisation, shift), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-decoration-none btn btn-danger" %>
             </td>
           </tr>
@@ -36,14 +36,6 @@
     </table>
     <div class="mt-5">
       <h3 class="mb-4">Let's add your shift, <%= current_user.name %></h3>
-      <%= simple_form_for [@organisation, @shift] do |f| %>
-        <div class="d-flex justify-content-around">
-          <div><%= f.input :shift_date, as: :date, html5: true, label: "Shift date" %></div>
-          <div><%= f.input :start_time, as: :time, html5: true, label: "Start" %></div>
-          <div><%= f.input :end_time, as: :time, html5: true, label: "Finish" %></div>
-          <div><%= f.input :break_length, label: "Break length (minutes)" %></div>
-          <div class="mt-4"><%= f.button :submit, class: "btn btn-success" %></div>
-        </div>
-      <% end %>
+      <%= render "form", organisation: @organisation, shift: @shift %>
     </div>
 </div>

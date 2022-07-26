@@ -1,0 +1,9 @@
+<%= simple_form_for [organisation, shift] do |f| %>
+  <div class="d-flex justify-content-around">
+    <div><%= f.input :shift_date, as: :date, html5: true, label: "Shift date" %></div>
+    <div><%= f.input :start_time, as: :time, html5: true, label: "Start" %></div>
+    <div><%= f.input :end_time, as: :time, html5: true, label: "Finish" %></div>
+    <div><%= f.input :break_length, label: "Break length (minutes)" %></div>
+    <div class="mt-4"><%= f.button :submit, class: "btn btn-success" %></div>
+  </div>
+<% end %>

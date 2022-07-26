@@ -1,6 +1,6 @@
 class ShiftsController < ApplicationController
-  before_action :set_organisation, only: %I[index create update destroy]
-  before_action :set_shift, only: %I[update destroy]
+  before_action :set_organisation, only: %I[index create edit update destroy]
+  before_action :set_shift, only: %I[edit update destroy]
 
   def index
     @shifts = @organisation.users.map(&:shifts).flatten
@@ -18,8 +18,15 @@ class ShiftsController < ApplicationController
     end
   end
 
-  def update
+  def edit
+  end
 
+  def update
+    if @shift.update(shift_params)
+      redirect_to organisation_shifts_path(@organisation), notice: 'Shift was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy

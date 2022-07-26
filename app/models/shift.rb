@@ -1,5 +1,5 @@
 class Shift < ApplicationRecord
-  attr_accessor :shift_date, :start_time, :end_time
+  attr_writer :shift_date, :start_time, :end_time
 
   belongs_to :user
   belongs_to :organisation
@@ -11,8 +11,8 @@ class Shift < ApplicationRecord
   validates :break_length, comparison: { less_than: :shift_length_minutes }
 
   def build_datetime_fields
-    self.started_at = "#{shift_date} #{start_time}".to_datetime
-    self.ended_at = "#{shift_date} #{end_time}".to_datetime
+    self.started_at = "#{@shift_date} #{@start_time}".to_datetime
+    self.ended_at = "#{@shift_date} #{@end_time}".to_datetime
   end
 
   def shift_length_minutes
@@ -25,5 +25,17 @@ class Shift < ApplicationRecord
 
   def shift_cost(rate)
     (net_work_minutes / 60.0) * rate
+  end
+
+  def shift_date
+    started_at&.to_date
+  end
+
+  def start_time
+    started_at&.to_time
+  end
+
+  def end_time
+    ended_at&.to_time
   end
 end
