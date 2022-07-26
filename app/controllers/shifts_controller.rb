@@ -38,6 +38,6 @@ class ShiftsController < ApplicationController
   end
 
   def shift_params
-    params.require(:shift).permit(:started_at, :ended_at, :break_length)
+    params.require(:shift).permit(:shift_date, :start_time, :end_time, :break_length)
   end
 end

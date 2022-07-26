@@ -1,7 +1,7 @@
 <div class="container pt-4">
   <h1>Here is <%= @organisation.name %>'s shifts</h1>
   <% if @shifts.present? %>
-    <table class="table table-striped table-hover mt-3">
+    <table class="table table-striped table-hover text-center mt-3">
       <thead>
         <tr>
           <th>Employee name</th>
@@ -23,8 +23,10 @@
             <td><%= shift.break_length %> min</td>
             <td><%= net_work_hours(shift) %></td>
             <td><%= shift.shift_cost(@organisation.hourly_rate) %></td>
-            <td><%= link_to "Modify", organisation_shift_path(@organisation, shift), method: :put, class: "text-decoration-none btn btn-info" %></td>
-            <td><%= link_to "Delete", organisation_shift_path(@organisation, shift), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-decoration-none btn btn-danger" %></td>
+            <td>
+              <%= link_to "Modify", organisation_shift_path(@organisation, shift), method: :put, class: "text-decoration-none btn btn-info" %>
+              <%= link_to "Delete", organisation_shift_path(@organisation, shift), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-decoration-none btn btn-danger" %>
+            </td>
           </tr>
         <% end %>
   <% else %>
@@ -33,12 +35,13 @@
       </tbody>
     </table>
     <div class="mt-5">
+      <h3 class="mb-4">Let's add your shift, <%= current_user.name %></h3>
       <%= simple_form_for [@organisation, @shift] do |f| %>
         <div class="d-flex justify-content-around">
-          <div class=""><%= f.input :started_at, as: :date, html5: true, label: "Shift date" %></div>
-          <div class=""><%= f.input :started_at, as: :time, ignore_date: true, html5: true, label: "Start" %></div>
-          <div class=""><%= f.input :ended_at, as: :time, ignore_date: true, html5: true, label: "Finish" %></div>
-          <div class=""><%= f.input :break_length, label: "Break length (minutes)" %></div>
+          <div><%= f.input :shift_date, as: :date, html5: true, label: "Shift date" %></div>
+          <div><%= f.input :start_time, as: :time, html5: true, label: "Start" %></div>
+          <div><%= f.input :end_time, as: :time, html5: true, label: "Finish" %></div>
+          <div><%= f.input :break_length, label: "Break length (minutes)" %></div>
           <div class="mt-4"><%= f.button :submit, class: "btn btn-success" %></div>
         </div>
       <% end %>
