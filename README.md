@@ -1,12 +1,14 @@
 # Adnat
 
-This is a Ruby on Rails challenge for [workforce.com](https://workforce.com/uk). This challenge is highly simplified version of the Tanda web app.
+This is a Ruby on Rails [challenge](https://github.com/TandaHQ/work-samples/tree/master/adnat%20(backend)) for [workforce.com](https://workforce.com/uk). This challenge is highly simplified version of the Tanda web app.
+This solution includes optionals 1, 2 and 3.
 
 ## Table of contents
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Run Tests](#run-tests)
 - [Built with](#built-with)
+- [To do](#to-do)
 - [Author](#author)
 
 ## Prerequisites
@@ -46,7 +48,7 @@ Open http://localhost:30000 on your browser.
 ## Run tests
 Run this command on your terminal:
 
-    rspec spec
+    rspec
 
 ## Built with
 
@@ -55,6 +57,12 @@ Run this command on your terminal:
 - Semantic HTML5 markup
 - Bootstrap 5.2.0
 
+## To do
+
+- Improve test coverage.
+- Enhance UI/UX.
+- Add search and filtering through shifts list.
+- Add overnight shifts and penalty rates on Sunday.
 
 ## Author
 - [Maryam Fazlali](https://github.com/MeryGoodernak)
