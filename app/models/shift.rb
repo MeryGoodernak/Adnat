@@ -10,7 +10,9 @@ class Shift < ApplicationRecord
 
   validates :started_at, :ended_at, presence: true
   validates :started_at, comparison: { less_than: :ended_at }
-  validates :break_length, comparison: { less_than: :shift_length_minutes }
+  validates :start_time, comparison: { less_than: :end_time }
+  validates :break_length, comparison: { greater_than_or_equal_to: 0, less_than: :shift_length_minutes },
+                           if: proc { |shift| shift.errors.empty? }
 
   def net_work_minutes
     shift_length_minutes - break_length

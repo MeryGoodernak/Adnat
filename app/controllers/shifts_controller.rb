@@ -16,7 +16,8 @@ class ShiftsController < ApplicationController
     if @shift.save
       redirect_back fallback_location: organisation_shifts_path(@organisation)
     else
-      render organisation_shifts_path(@organisation), status: :unprocessable_entity
+      # byebug
+      render :index, status: :unprocessable_entity
     end
   end
 
