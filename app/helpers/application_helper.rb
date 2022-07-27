@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def net_work_hours(shift)
     net_work_minutes = shift.net_work_minutes

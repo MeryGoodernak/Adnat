@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
 
-  root to: "organisations#index"
+  root to: 'organisations#index'
 
   resources :organisations, except: %i[new] do
     resources :shifts, except: %i[new show] do

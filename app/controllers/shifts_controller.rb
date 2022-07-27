@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ShiftsController < ApplicationController
   before_action :set_organisation, only: %I[index create edit update destroy previous]
   before_action :set_shift, only: %I[edit update destroy]
@@ -18,8 +20,7 @@ class ShiftsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @shift.update(shift_params)
@@ -31,7 +32,7 @@ class ShiftsController < ApplicationController
 
   def destroy
     @shift.destroy
-    redirect_to organisation_shifts_path(@organisation), status: :see_other, notice: "Shift was successfully deleted."
+    redirect_to organisation_shifts_path(@organisation), status: :see_other, notice: 'Shift was successfully deleted.'
   end
 
   def previous

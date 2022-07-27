@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrganisationsController < ApplicationController
   before_action :set_organisation, only: %i[show edit update destroy join leave]
 
@@ -6,20 +8,18 @@ class OrganisationsController < ApplicationController
     @organisation = Organisation.new
   end
 
-  def show
-  end
+  def show; end
 
   def create
     @organisation = Organisation.new(organisation_params)
     if @organisation.save
-      redirect_to organisations_path, notice: "Organisation was successfully added."
+      redirect_to organisations_path, notice: 'Organisation was successfully added.'
     else
       render organisations_path, status: :unprocessable_entity
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @organisation.update(organisation_params)
@@ -31,7 +31,7 @@ class OrganisationsController < ApplicationController
 
   def destroy
     @organisation.destroy
-    redirect_to organisations_path, status: :see_other, notice: "Organisation was successfully deleted."
+    redirect_to organisations_path, status: :see_other, notice: 'Organisation was successfully deleted.'
   end
 
   def leave

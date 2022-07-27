@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Shift < ApplicationRecord
   attr_writer :shift_date, :start_time, :end_time
 
