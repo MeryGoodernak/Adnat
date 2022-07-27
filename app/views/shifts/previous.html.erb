@@ -1,36 +1,11 @@
 <div class="container pt-4">
   <h1>Here is employees of <%= @organisation.name %> previous shifts</h1>
   <% if @shifts.present? %>
-    <table class="table table-striped table-hover text-center mt-3">
-      <thead>
-        <tr>
-          <th>Employee name</th>
-          <th>Shift date</th>
-          <th>Start time</th>
-          <th>Finish time</th>
-          <th>Break length</th>
-          <th>Hours worked</th>
-          <th>Shift cost</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @shifts.each do |shift| %>
-          <tr>
-            <td><%= shift.user.name %></td>
-            <td><%= shift.started_at.strftime("%d/%m/%Y") %></td>
-            <td><%= shift.started_at.strftime("%I:%M%p") %></td>
-            <td><%= shift.ended_at.strftime("%I:%M%p") %></td>
-            <td><%= shift.break_length %> min</td>
-            <td><%= net_work_hours(shift) %></td>
-            <td><%= shift.shift_cost(shift.organisation.hourly_rate).round(2) %></td>
-          </tr>
-        <% end %>
+    <%= render "list", shifts: @shifts, organisation: @organisation %>
   <% else %>
-          <tr>No shift history for <%= @organisation.name %></tr>
+    <p>No shift history for <%= @organisation.name %></p>
   <% end %>
-      </tbody>
-    </table>
-    <div class="mt-5">
-      <h4 class="mb-4"><%= link_to "Current shifts", organisation_shifts_path(@organisation), class: "text-decoration-none" %></h4>
-    </div>
+  <div class="mt-5">
+    <h4 class="mb-4"><%= link_to "Current shifts", organisation_shifts_path(@organisation), class: "text-decoration-none" %></h4>
+  </div>
 </div>
