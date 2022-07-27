@@ -10,15 +10,6 @@ class Shift < ApplicationRecord
   validates :started_at, comparison: { less_than: :ended_at }
   validates :break_length, comparison: { less_than: :shift_length_minutes }
 
-  def build_datetime_fields
-    self.started_at = "#{@shift_date} #{@start_time}".to_datetime
-    self.ended_at = "#{@shift_date} #{@end_time}".to_datetime
-  end
-
-  def shift_length_minutes
-    ((ended_at.to_datetime - started_at.to_datetime) * 24 * 60).to_i
-  end
-
   def net_work_minutes
     shift_length_minutes - break_length
   end
@@ -37,5 +28,18 @@ class Shift < ApplicationRecord
 
   def end_time
     ended_at&.to_time
+  end
+
+  private
+
+  def build_datetime_fields
+    self.started_at = "#{@shift_date} #{@start_time}"&.to_datetime
+    self.ended_at = "#{@shift_date} #{@end_time}"&.to_datetime
+  end
+
+  def shift_length_minutes
+    return 0 if ended_at.blank? || started_at.blank?
+
+    ((ended_at.to_datetime - started_at.to_datetime) * 24 * 60).to_i
   end
 end
