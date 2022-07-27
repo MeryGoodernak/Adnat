@@ -8,7 +8,6 @@ This is a Ruby on Rails challenge for [workforce.com](https://workforce.com/uk).
 - [Run Tests](#run-tests)
 - [Built with](#built-with)
 - [Author](#author)
-- [License](#license)
 
 ## Prerequisites
 
@@ -59,7 +58,3 @@ Run this command on your terminal:
 
 ## Author
 - [Maryam Fazlali](https://github.com/MeryGoodernak)
-
-
-## License
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
